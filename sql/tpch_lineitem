@@ -1,8 +1,0 @@
-select
-    *
-from
-    tpch.lineitem
-WHERE
-    l_suppkey = 11315
-limit
-    100

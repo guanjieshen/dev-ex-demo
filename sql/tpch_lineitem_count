@@ -1,0 +1,4 @@
+select
+    count(*) as total_number_of_rows
+from
+    tpch.lineitem

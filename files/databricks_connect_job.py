@@ -1,4 +1,8 @@
 from pyspark.sql.types import *
+from databricks.connect import DatabricksSession
+
+
+spark = DatabricksSession.builder.getOrCreate()
 
 # Read data from Databricks table
 line_item = spark.read.table("gshen_catalog.tpch.lineitem")
@@ -6,8 +10,7 @@ line_item = spark.read.table("gshen_catalog.tpch.lineitem")
 # Aggregate dataframe by l_supplykey and get the count
 line_item_agg = line_item.groupBy("l_suppkey").count()
 
-# Rename dataframe column count to count_num
-line_item_agg = line_item_agg.withColumnRenamed("count", "count_num")
-
 # Write data to Databricks table
-line_item_agg.write.mode("overwrite").saveAsTable("gshen_catalog.tpch.lineitem_agg")
+line_item_agg.write.mode("overwrite").saveAsTable(
+    "gshen_catalog.tpch.lineitem_agg_db_connect"
+)
