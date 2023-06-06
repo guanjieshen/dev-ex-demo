@@ -11,6 +11,6 @@ line_item = spark.read.table("gshen_catalog.tpch.lineitem")
 line_item_agg = line_item.groupBy("l_suppkey").count()
 
 # Write data to Databricks table
-line_item_agg.write.mode("overwrite").saveAsTable(
+line_item_agg.write.mode("overwrite").option("overwriteSchema", "True").saveAsTable(
     "gshen_catalog.tpch.lineitem_agg_db_connect"
 )
